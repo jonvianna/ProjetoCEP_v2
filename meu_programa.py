@@ -11,8 +11,16 @@ df = pd.read_excel(file_path)
 # Função para verificar o CEP
 def verificar_cep():
     # Obtendo o CEP digitado pelo usuário
-    cep = int(entrada_cep.get())
-    
+    cep = (entrada_cep.get())
+
+    # Verificando se o CEP possui 8 dígitos
+    if len(cep) != 8:
+        messagebox.showinfo("Erro", "Digite um CEP válido")
+        entrada_cep.select_range(0, tk.END)
+        return
+
+    cep = int(cep)
+
     # Verificando se o CEP está dentro do range de algum registro na tabela
     for i, row in df.iterrows():
         if row['Cep inicio'] <= cep <= row['Cep fim']:
